@@ -1,0 +1,22 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.9"
+    }
+  },
+  "remoteEnv": {
+    "GREET": "Hi dude !!"
+  },
+  "postCreateCommand": "echo $GREET",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",             // Python extension
+        "ms-azuretools.vscode-docker",  // Docker extension
+        "mongodb.mongodb-vscode",       // MongoDB extension
+        "esbenp.prettier-vscode"        // Prettier
+      ]
+    }
+  }
+}
