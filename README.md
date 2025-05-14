@@ -8,8 +8,11 @@ Our workspace requires some "metals" to be operative:
 - Elasticsearch 4 Rocket (kit-kat)
 - PostgreSQL (macarons)
 - Redis (hit)
-- Rocket
 - n8n
+- Rocket
+  - Restful API (api)
+  - Bridge (bridge)
+  - Indexer (indexer)
 
 ## Newtork
 
