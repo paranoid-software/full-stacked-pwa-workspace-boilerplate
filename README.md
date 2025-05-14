@@ -1,6 +1,17 @@
 # Metals
 
-This branhc provides a comprehensive development environment for Progressive Web Applications (PWAs), with ready-to-use infrastructure components and services. It's designed to streamline the setup of a complete development workspace using Docker containers, allowing developers to focus on building applications rather than configuring infrastructure.
+This branch provides a comprehensive development environment for Progressive Web Applications (PWAs), with ready-to-use infrastructure components and services. It's designed to streamline the setup of a complete development workspace using Docker containers, allowing developers to focus on building applications rather than configuring infrastructure.
+
+## Development Environment
+
+A pre-configured development container is available using the .devcontainer setup, which includes:
+
+- Python 3.9 environment
+- Docker extension for container management
+- MongoDB extensions for database interaction
+- REST client for API testing
+- Code formatting with Prettier
+- Database client tools
 
 ## Overview
 
@@ -23,6 +34,17 @@ Our workspace requires the following "metals" to be operative:
 | Rocket Bridge   | bridge         | Bridge service for Rocket                | 8001                       |
 | Rocket Indexer  | indexer        | Indexing service for Rocket              | 8002                       |
 
+### Rocket API Testing
+
+The repository includes a sample HTTP playground file (.metals/apps/rocket/playground.http) for testing the Rocket API endpoints. You can use the VS Code REST Client extension to run these requests directly from the editor.
+
+Example endpoints:
+
+- Health check
+- Authentication token generation
+- Application creation
+- Sample object for "Tasks" creation and retrieval
+
 ## Network Setup
 
 To avoid complexity in communications between services, we start by creating a "main" network that will be shared among metals and applications:
@@ -31,7 +53,7 @@ To avoid complexity in communications between services, we start by creating a "
 docker network create main
 ```
 
-### Environment Configuration
+## Environment Configuration
 
 Each service requires environment variables to be set. You can create .env files in the respective directories:
 
@@ -40,3 +62,33 @@ Each service requires environment variables to be set. You can create .env files
 .metals/messaging/.env - For RabbitMQ configuration
 .metals/apps/n8n/.env - For n8n configuration
 ````
+
+## Starting Services
+
+###Start persistence services:
+
+```
+cd .metals/persistence
+docker compose up -d
+```
+
+### Start messaging services:
+
+```
+cd .metals/messaging
+docker compose up -d
+```
+
+### Start Rocket services:
+
+```
+cd .metals/apps/rocket
+docker compose up -d
+```
+
+### Start n8n workflow automation:
+
+```
+cd .metals/apps/n8n
+docker compose up -d
+```
