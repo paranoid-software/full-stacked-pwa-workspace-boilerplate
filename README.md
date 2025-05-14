@@ -1,5 +1,20 @@
-# Workspace Boilerplates
+# Metals
 
-This repository serves as a simple guide to help understand and adopt the company’s coding strategies and general software development practices.
+Our workspace requires some "metals" to be operative:
 
-The main branch is not intended to hold any code. Each individual branch will aim to demonstrate its purpose as clearly as possible.
+- RabbitMQ (the-rabbit)
+- MongoDB 4 Rocket (biscuit)
+- MongoDB 4 Elemental CMS (oreo)
+- Elasticsearch 4 Rocket (kit-kat)
+- PostgreSQL (macarons)
+- Redis (hit)
+- Rocket
+- n8n
+
+## Newtork
+
+To avoid complexity in communications between services we will start by creating a "main" network that will be shared among metals and applications.
+
+```bash
+docker network create main
+```
