@@ -22,7 +22,7 @@ services:
     ports:
       - "8001:8080"
     volumes:
-      - ./_/etc/rocket/brdige:/etc/rocket-bridge/settings
+      - ./_/etc/rocket/bridge:/etc/rocket-bridge/settings
       - ./_/etc/rocket/auth:/etc/rocket-bridge/auth
     environment:
       PYTHONUNBUFFERED: 1
