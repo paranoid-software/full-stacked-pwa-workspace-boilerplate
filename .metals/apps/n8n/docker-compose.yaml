@@ -1,0 +1,52 @@
+services:
+
+  db-init:
+    container_name: db-init
+    image: postgres:14
+    entrypoint: [ "/bin/bash", "-c", "chmod u+x /init-db.sh && /init-db.sh" ]
+    volumes:
+      - ./init-db.sh:/init-db.sh
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_NON_ROOT_USER=${POSTGRES_NON_ROOT_USER}
+      - POSTGRES_NON_ROOT_PASSWORD=${POSTGRES_NON_ROOT_PASSWORD}
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - main
+    restart: "no"
+
+  n8n:
+    container_name: n8n
+    image: docker.n8n.io/n8nio/n8n:1.29.1
+    restart: always
+    ports:
+      - 5678:5678
+    environment:
+      - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      - N8N_LOG_LEVEL=debug
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=macarons
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${POSTGRES_DB}
+      - DB_POSTGRESDB_USER=${POSTGRES_NON_ROOT_USER}
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_NON_ROOT_PASSWORD}
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=axios
+      - N8N_ENCRYPTION_KEY=cQB+oKb4yo0teI/Des1OC4Vbf3p7EAbv
+    depends_on:
+      - db-init
+    volumes:
+      - ./_/var/lib/n8n:/var/lib/n8n
+    networks:
+      - main
+
+networks:
+  main:
+    external: true

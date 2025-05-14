@@ -1,0 +1,18 @@
+services:
+
+  the-rabbit:
+    container_name: the-rabbit
+    restart: always
+    image: rabbitmq:3.8.6-management-alpine
+    ports:
+        - "9005:15672"
+        - "9007:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${THE_RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${THE_RABBITMQ_DEFAULT_PASS}
+    networks:
+      - main
+
+networks:
+  main:
+    external: true

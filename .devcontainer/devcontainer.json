@@ -15,7 +15,9 @@
         "ms-python.python",             // Python extension
         "ms-azuretools.vscode-docker",  // Docker extension
         "mongodb.mongodb-vscode",       // MongoDB extension
-        "esbenp.prettier-vscode"        // Prettier
+        "esbenp.prettier-vscode" ,       // Prettier
+        "cweijan.dbclient-jdbc",
+        "humao.rest-client"
       ]
     }
   }
