@@ -47,16 +47,15 @@ The Rocket services (API, Bridge, and Indexer) require configuration files that 
 .metals/apps/rocket/_/etc/rocket/auth/     # Shared authentication files
 ```
 
-#### Configuration Files
-
 Before starting the Rocket services, review the necessary configuration files located at:
 
 ```
 .metals/apps/rocket/_/etc/rocket/api/default.json
 .metals/apps/rocket/_/etc/rocket/bridge/default.json
 .metals/apps/rocket/_/etc/rocket/indexer/default.json
-.metals/apps/rocket/_/etc/rocket/auth/cookie.monsta
 ```
+
+> Logy and zookeeper base endpoints are configured by default to n8n webhooks that must be created in order to receive messages.
 
 ### API Testing
 
