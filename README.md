@@ -34,7 +34,31 @@ Our workspace requires the following "metals" to be operative:
 | Rocket Bridge   | bridge         | Bridge service for Rocket                | 8001                       |
 | Rocket Indexer  | indexer        | Indexing service for Rocket              | 8002                       |
 
-### Rocket API Testing
+## Rocket
+
+### Configuration
+
+The Rocket services (API, Bridge, and Indexer) require configuration files that are mounted into their respective containers. Based on the docker-compose.yaml file, these are the configurations needed:
+
+```
+.metals/apps/rocket/_/etc/rocket/api/      # API configuration files
+.metals/apps/rocket/_/etc/rocket/bridge/   # Bridge configuration files
+.metals/apps/rocket/_/etc/rocket/indexer/  # Indexer configuration files
+.metals/apps/rocket/_/etc/rocket/auth/     # Shared authentication files
+```
+
+#### Configuration Files
+
+Before starting the Rocket services, review the necessary configuration files located at:
+
+```
+.metals/apps/rocket/_/etc/rocket/api/default.json
+.metals/apps/rocket/_/etc/rocket/bridge/default.json
+.metals/apps/rocket/_/etc/rocket/indexer/default.json
+.metals/apps/rocket/_/etc/rocket/auth/cookie.monsta
+```
+
+### API Testing
 
 The repository includes a sample HTTP playground file (.metals/apps/rocket/playground.http) for testing the Rocket API endpoints. You can use the VS Code REST Client extension to run these requests directly from the editor.
 
@@ -55,17 +79,64 @@ docker network create main
 
 ## Environment Configuration
 
-Each service requires environment variables to be set. You can create .env files in the respective directories:
+Each docker-compose.yaml file relies on environment variables that should be defined in corresponding .env files:
+
+1. Persistence Environment Variables (.metals/persistence/.env)
+
+### MongoDB "biscuit" credentials (for Rocket)
 
 ```
-.metals/persistence/.env - For database configurations
-.metals/messaging/.env - For RabbitMQ configuration
-.metals/apps/n8n/.env - For n8n configuration
-````
+BISCUIT_SA_USERNAME=admin
+BISCUIT_SA_PASSWORD=<your-password>
+```
+
+### MongoDB "oreo" credentials (for Elemental CMS)
+
+```
+OREO_SA_USERNAME=admin
+OREO_SA_PASSWORD=<your-password>
+```
+
+### PostgreSQL "macarons" credentials
+
+```
+MACARONS_SA_USERNAME=postgres
+MACARONS_SA_PASSWORD=<your-password>
+MACARONS_DB=postgres
+```
+
+2. Messaging Environment Variables (.metals/messaging/.env)
+
+### RabbitMQ credentials
+
+```
+THE_RABBITMQ_DEFAULT_USER=admin
+THE_RABBITMQ_DEFAULT_PASS=<your-password>
+```
+
+3. N8N Environment Variables (.metals/apps/n8n/.env)
+
+### PostgreSQL connection
+
+```
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=<same-as-MACARONS_SA_PASSWORD>
+POSTGRES_DB=n8n
+POSTGRES_NON_ROOT_USER=n8n
+POSTGRES_NON_ROOT_PASSWORD=<your-password>
+```
+
+### N8N configuration
+
+```
+SUBDOMAIN=n8n
+DOMAIN_NAME=yourdomain.com
+GENERIC_TIMEZONE=UTC
+```
 
 ## Starting Services
 
-###Start persistence services:
+### Start persistence services:
 
 ```
 cd .metals/persistence

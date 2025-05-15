@@ -39,12 +39,12 @@
   },
   "loggingServiceContext": {
     "id": "logy",
-    "host": "logy",
-    "portNumber": 30699
+    "baseEndpoint": "http://n8n:5678/webhook/no-api/logy",
+    "headers": {}
   },
   "zooServiceContext": {
     "id": "zookeeper",
-    "hostName": "zookeeper",
-    "portNumber": 30698
+    "baseEndpoint": "http://n8n:5678/webhook/no-api/zookeeper",
+    "headers": {}
   }
 }

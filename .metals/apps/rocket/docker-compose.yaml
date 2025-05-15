@@ -1,7 +1,7 @@
 services:
   
   api:
-    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/api:20250311.1
+    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/api:20250515.1
     container_name: api
     ports:
       - "8000:8000"
@@ -17,7 +17,7 @@ services:
       - main
 
   bridge:
-    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/bridge:20250429.9
+    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/bridge:20250515.6
     container_name: bridge
     ports:
       - "8001:8080"
@@ -25,25 +25,23 @@ services:
       - ./_/etc/rocket/bridge:/etc/rocket-bridge/settings
       - ./_/etc/rocket/auth:/etc/rocket-bridge/auth
     environment:
-      PYTHONUNBUFFERED: 1
       CONFIG_FILEPATH: /etc/rocket-bridge/settings/default.json
       COOKIE_MONSTA_FILEPATH: /etc/rocket-bridge/auth/cookie.monsta
-      ENV: production
+      ASPNETCORE_ENVIRONMENT: Production
     restart: always
     networks:
       - main
 
   indexer:
-    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/indexer:20250501.2
+    image: us-east1-docker.pkg.dev/paranoid-cloud-studio/rocket/indexer:20250515.1
     container_name: indexer
     ports:
       - "8002:8080"
     volumes:
       - ./_/etc/rocket/indexer:/etc/rocket-indexer/settings
     environment:
-      PYTHONUNBUFFERED: 1
       CONFIG_FILEPATH: /etc/rocket-indexer/settings/default.json
-      ENV: production
+      ASPNETCORE_ENVIRONMENT: Production
     restart: always
     networks:
       - main
