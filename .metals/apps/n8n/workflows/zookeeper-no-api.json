@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/no-api/zookeeper/artifacts",
+        "options": {}
+      },
+      "id": "a353a319-f3d3-4d07-933b-cd8304bdef1f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        360
+      ],
+      "webhookId": "d90bc2d1-c3ea-4dbe-aad1-c99677d4837e"
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "name": "zookeeper-no-api"
+}

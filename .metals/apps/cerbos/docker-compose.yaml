@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  cerbos-db-init:
+    container_name: cerbos-db-init
+    image: postgres:14
+    entrypoint: [ "/bin/bash", "-c", "chmod u+x /init-db.sh && /init-db.sh" ]
+    volumes:
+      - ./init-db.sh:/init-db.sh
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=postgres
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - main
+    restart: "no"
+
+  cerbos:
+    container_name: cerbos
+    image: ghcr.io/cerbos/cerbos:0.37.0
+    command: server --config=/etc/cerbos/cerbos-config.yaml
+    ports:
+      - "3592:3592"
+    volumes:
+      - ./_/etc/cerbos/cerbos-config.yaml:/etc/cerbos/cerbos-config.yaml:ro
+    networks:
+      - main
+    restart: always
+    depends_on:
+      - cerbos-db-init
+
+networks:
+  main:
+    external: true

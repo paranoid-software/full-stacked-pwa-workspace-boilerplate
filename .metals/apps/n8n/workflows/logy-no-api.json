@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/no-api/logy/messages",
+        "options": {}
+      },
+      "id": "1758eb93-359f-4d8a-83fd-5daa3021a9f7",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        360
+      ],
+      "webhookId": "af4dc9e8-e337-4acd-9228-71ef23607fe8"
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "name": "logy-no-api"
+}
