@@ -71,9 +71,19 @@ Example endpoints:
 
 ## Cerbos
 
+### Configuration
+
+The cerbos default configuration file is located at .metals/apps/cerbos/_/etc/cerbos/cerbos-config.yaml
+
+### db-init
+
+Cerbos need a database schema which is created on postgres db, and under the name of cerbos. The schema can be found in init-db.sh file at .metals/apps/n8n folder.
+
 ## n8n
 
+### db-init
 
+n8n needs it database to be initialized before the web server or workers to be launch. You can find the init-db.sh launcer file at .metals/apps/n8n folder
 
 ## Network Setup
 
