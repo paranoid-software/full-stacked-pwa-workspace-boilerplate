@@ -15,7 +15,9 @@
         "ms-python.python",
         "ms-azuretools.vscode-docker",
         "mongodb.mongodb-vscode",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode" ,
+        "cweijan.dbclient-jdbc",
+        "humao.rest-client"
       ]
     }
   }
